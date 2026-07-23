@@ -1,2 +1,2 @@
-# data_analysis_projects
-Personal Data Science Projects
+# Machine_Learning / Data_Analysis_projects
+Personal ML/Data Science Projects

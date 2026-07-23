@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jupyter Notebook — generated with runcell</title>
+    <meta name="description" content="Exported with runcell — convert .ipynb notebooks to HTML or PDF anytime at runcell.dev." />
+    <meta name="generator" content="runcell" />
+    <style>
+        :root {
+            --jp-code-font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+            --jp-content-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            --jp-cell-prompt-width: 64px;
+            --jp-input-prompt-color: #307fc1;
+            --jp-output-prompt-color: #bf5b3d;
+            --jp-cell-input-bg: #f7f7f7;
+            --jp-layout-color0: #ffffff;
+            --jp-layout-color1: #f7f7f7;
+            --jp-border-color1: #e0e0e0;
+            --jp-content-font-color0: #000000;
+            --jp-content-font-color1: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--jp-content-font-family);
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--jp-content-font-color0);
+            background-color: var(--jp-layout-color0);
+            margin: 0;
+            padding: 0;
+        }
+
+        .notebook-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cell structure */
+        .cell {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cell-prompt {
+            min-width: var(--jp-cell-prompt-width);
+            width: var(--jp-cell-prompt-width);
+            font-family: var(--jp-code-font-family);
+            font-size: 12px;
+            padding: 10px 8px 10px 0;
+            text-align: right;
+            flex-shrink: 0;
+            user-select: none;
+        }
+
+        .cell-content {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        /* Input prompt styling - Jupyter blue */
+        .input-prompt {
+            color: var(--jp-input-prompt-color);
+            font-weight: bold;
+        }
+
+        /* Output prompt styling - Jupyter red/orange */
+        .output-prompt {
+            color: var(--jp-output-prompt-color);
+            font-weight: bold;
+        }
+
+        /* Code cell input area */
+        .input-area {
+            background-color: var(--jp-cell-input-bg);
+            border: 1px solid var(--jp-border-color1);
+            border-radius: 2px;
+            padding: 8px 12px;
+            overflow-x: auto;
+        }
+
+        .input-area pre {
+            margin: 0;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Output area */
+        .output-area {
+            margin-top: 0;
+        }
+
+        .output-wrapper {
+            display: flex;
+            flex-direction: row;
+            margin-top: 4px;
+        }
+
+        .output-content {
+            flex: 1;
+            min-width: 0;
+            padding: 8px 0;
+        }
+
+        .output-content pre {
+            margin: 0;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Stream output (stdout/stderr) */
+        .output-stream {
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .output-stderr {
+            background-color: #fdd;
+            padding: 8px 12px;
+            border-radius: 2px;
+        }
+
+        /* Execute result / display data */
+        .output-result {
+            padding: 4px 0;
+        }
+
+        .output-result pre {
+            margin: 0;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+        }
+
+        /* Image output */
+        .output-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* HTML output (DataFrames, etc.) */
+        .output-html {
+            overflow-x: auto;
+        }
+
+        .output-html table {
+            border-collapse: collapse;
+            font-size: 13px;
+            font-family: var(--jp-content-font-family);
+        }
+
+        .output-html table th,
+        .output-html table td {
+            border: 1px solid #ddd;
+            padding: 6px 10px;
+            text-align: left;
+        }
+
+        .output-html table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .output-html table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Error output */
+        .output-error {
+            background-color: #fff0f0;
+            padding: 8px 12px;
+            border-radius: 2px;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+
+        /* Markdown cell styling */
+        .markdown-cell {
+            padding: 10px 0;
+        }
+
+        .markdown-cell h1 {
+            font-size: 2em;
+            font-weight: 600;
+            margin: 0.67em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid var(--jp-border-color1);
+        }
+
+        .markdown-cell h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 0.83em 0;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid var(--jp-border-color1);
+        }
+
+        .markdown-cell h3 {
+            font-size: 1.25em;
+            font-weight: 600;
+            margin: 1em 0;
+        }
+
+        .markdown-cell h4 {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 1.33em 0;
+        }
+
+        .markdown-cell h5 {
+            font-size: 0.875em;
+            font-weight: 600;
+            margin: 1.67em 0;
+        }
+
+        .markdown-cell h6 {
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 2.33em 0;
+            color: #6a737d;
+        }
+
+        .markdown-cell p {
+            margin: 0 0 16px 0;
+            line-height: 1.6;
+        }
+
+        .markdown-cell code {
+            font-family: var(--jp-code-font-family);
+            font-size: 85%;
+            background-color: rgba(27, 31, 35, 0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        .markdown-cell pre {
+            background-color: var(--jp-cell-input-bg);
+            border: 1px solid var(--jp-border-color1);
+            border-radius: 3px;
+            padding: 16px;
+            overflow-x: auto;
+            font-size: 85%;
+            line-height: 1.45;
+        }
+
+        .markdown-cell pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-size: 100%;
+        }
+
+        .markdown-cell blockquote {
+            margin: 0 0 16px 0;
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 4px solid #dfe2e5;
+        }
+
+        .markdown-cell ul,
+        .markdown-cell ol {
+            margin: 0 0 16px 0;
+            padding-left: 2em;
+        }
+
+        .markdown-cell li {
+            margin: 0.25em 0;
+        }
+
+        .markdown-cell a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .markdown-cell a:hover {
+            text-decoration: underline;
+        }
+
+        .markdown-cell hr {
+            border: 0;
+            border-top: 1px solid var(--jp-border-color1);
+            margin: 24px 0;
+        }
+
+        .markdown-cell img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .markdown-cell table {
+            border-collapse: collapse;
+            margin: 0 0 16px 0;
+        }
+
+        .markdown-cell table th,
+        .markdown-cell table td {
+            border: 1px solid #dfe2e5;
+            padding: 6px 13px;
+        }
+
+        .markdown-cell table th {
+            font-weight: 600;
+            background-color: #f6f8fa;
+        }
+
+        .markdown-cell table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        /* Raw cell styling */
+        .raw-cell {
+            background-color: var(--jp-layout-color1);
+            border: 1px solid var(--jp-border-color1);
+            border-radius: 2px;
+            padding: 8px 12px;
+            font-family: var(--jp-code-font-family);
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+
+        /* Empty prompt placeholder */
+        .prompt-empty {
+            color: transparent;
+        }
+
+        .export-footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--jp-border-color1);
+            color: #555;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .export-footer a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .export-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="notebook-container">
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell">Anusha Sundar 7.22.2026<br><br></div>
+            </div>
+        </div>
+        <div class="cell cell-markdown">
+            <div class="cell-prompt prompt-empty">&nbsp;</div>
+            <div class="cell-content">
+                <div class="markdown-cell"><strong>Context:</strong><br>One of the most interesting tasks in deep learning is to recognize objects in natural scenes. The ability to process visual information using machine learning algorithms can be very useful as demonstrated in various applications.<br><br>The SVHN dataset contains over 600,000 labeled digits cropped from street-level photos. It is one of the most popular image recognition datasets. It has been used in neural networks created by Google to improve the map quality by automatically transcribing the address numbers from a patch of pixels. The transcribed number with a known street address helps pinpoint the location of the building it represents.<br><br><br><br><strong>Objective:</strong><br>Our objective is to predict the number depicted inside the image by using Artificial or Fully Connected Feed Forward Neural Networks and Convolutional Neural Networks. We will go through various models of each and finally select the one that is giving us the best performance.<br><br><br><br><strong>Dataset:</strong><br>Our dataset is present in .h5 format. We will use a subset of our dataset to save ourselves a lot of computation time.</div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+
+import h5py
+
+
+# For Data Visualization
+import cv2
+import seaborn as sns
+
+# For Model Building
+import tensorflow as tf
+import keras
+from tensorflow.keras.models import load_model
+from tensorflow.keras.models import Sequential, Model # Sequential API for sequential model
+from tensorflow.keras.layers import Dense, Dropout, Flatten # Importing different layers
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, BatchNormalization, Activation, Input, LeakyReLU, Activation
+from tensorflow.keras import backend
+from tensorflow.keras.utils import to_categorical # To perform one-hot encoding
+from tensorflow.keras.optimizers import RMSprop, Adam, SGD # Optimizers for optimizing the model
+from tensorflow.keras.callbacks import EarlyStopping  # Regularization method to prevent the overfitting
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras import losses, optimizers
+from tensorflow.keras.preprocessing.image import load_img
+from google.colab.patches import cv2_imshow</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>from google.colab import drive
+drive.mount('/content/drive')</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount("/content/drive", force_remount=True).
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Storing the path of the data file from the Google drive
+data = '/content/drive/MyDrive/Colab Notebooks/SVHN_single_grey1 (1).h5'
+categories = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+image_size = 150</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Open the file in read-only mode
+with h5py.File('/content/drive/MyDrive/Colab Notebooks/SVHN_single_grey1 (1).h5', 'r') as f:
+    # 1. Check what datasets are inside the file
+    print("Available keys:", list(f.keys()))</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Available keys: ['X_test', 'X_train', 'X_val', 'y_test', 'y_train', 'y_val']
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>h5_path = '/content/drive/MyDrive/Colab Notebooks/SVHN_single_grey1 (1).h5'
+with h5py.File(h5_path, 'r') as f:
+
+  X_train = f['X_train'][:]
+  y_train = f['y_train'][:]
+  X_val   = f['X_val'][:]
+  y_val   = f['y_val'][:]
+  X_test  = f['X_test'][:]
+  y_test  = f['y_test'][:]</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Save all arrays into a single compressed .npz zip file
+np.savez_compressed('SVHN_data.npz',
+                    X_train=X_train, y_train=y_train,
+                    X_val=X_val, y_val=y_val,
+                    X_test=X_test, y_test=y_test)</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># TRAIN data creation
+def load_svhn_training_data(archive_path):
+   # Load the compressed npz zip archive
+    data = np.load(archive_path)
+    # Extract the individual arrays into variables
+    X_train = data['X_train']
+    y_train = data['y_train']
+
+    print(f"Successfully processed {X_train.shape[0]} images!")
+
+    return X_train, y_train
+# Call function and assign output values to variables
+    X_train, y_train = load_svhn_training_data('/content/SVHN_data_fixed.npz')
+
+#print training data
+print("Training images shape:", X_train.shape)
+print("Training labels shape:", y_train.shape)
+print("First label entry:", y_train[0])
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Training images shape: (42000, 32, 32)
+Training labels shape: (42000,)
+First label entry: 2
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Add a channel dimension for grayscale (42000, 32, 32, 1)
+X_train_cnn = X_train[..., None]
+
+# Normalize pixel values from [0, 255] to [0.0, 1.0] for stable training
+X_train_cnn = X_train_cnn / 255.0</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>#repeat for TEST data creation
+
+def load_svhn_training_data(archive_path):
+   # Load the compressed npz zip archive
+    data = np.load(archive_path)
+    # Extract the individual arrays into variables
+    X_test = data['X_test']
+    y_test = data['y_test']
+
+    print(f"Successfully processed {X_test.shape[0]} images!")
+
+    return X_test, y_test
+# Call function and assign output values to variables
+    X_test, y_test = load_svhn_training_data('/content/SVHN_data_fixed.npz')
+
+#print training data
+print("Test images shape:", X_test.shape)
+print("Test labels shape:", y_test.shape)
+print("First label entry:", y_test[0])</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Test images shape: (18000, 32, 32)
+Test labels shape: (18000,)
+First label entry: 1
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Add a channel dimension for grayscale (42000, 32, 32, 1)
+X_test_cnn = X_test[..., None]
+
+# Normalize pixel values from [0, 255] to [0.0, 1.0] for stable testing
+X_test_cnn = X_test_cnn / 255.0</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>print(f"{data}/{categories[0]}")</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">/content/drive/MyDrive/Colab Notebooks/SVHN_single_grey1 (1).h5/zero
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>print("Unique labels in y_train:", np.unique(y_train))
+print("Unique labels in y_test:", np.unique(y_test))</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Unique labels in y_train: [0 1 2 3 4 5 6 7 8 9]
+Unique labels in y_test: [0 1 2 3 4 5 6 7 8 9]
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>print("Unique labels in y_train:", np.unique(X_train))
+print("Unique labels in y_test:", np.unique(X_test))</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Unique labels in y_train: [0.000000e+00 1.140000e-01 2.280000e-01 ... 2.547465e+02 2.548605e+02
+ 2.549745e+02]
+Unique labels in y_test: [0.000000e+00 1.140000e-01 2.989000e-01 ... 2.547465e+02 2.548605e+02
+ 2.549745e+02]
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>print("First 10 training labels:", y_train[:10])
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">First 10 training labels: [2 6 7 4 4 0 3 0 7 3]
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Plot the first 5 images and their corresponding labels
+
+plt.figure(figsize=(12, 3))
+for i in range(5):
+    plt.subplot(1, 5, i + 1)
+
+    img = X_train[i]
+
+# Valid values for images (e.g., 0-255 for uint8 [unsigned 8-bit integer] or 0-1 for float)
+if img.max() &gt; 1.0:
+        img = img.astype(np.uint8)
+plt.imshow(img)
+
+# Get the label
+label = y_train[i]
+
+plt.title(f"Label: {label}")
+plt.axis('off')
+plt.show()
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <img class="output-image" src="data:image/png;base64,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
+" alt="Output" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Filter and Plot by Category
+# Why flatten? Before flatten: [[1], [5], [3], [7]]
+      # (Shape is 2D: 4 rows, 1 column)
+      # After flatten: [1, 5, 3, 7] (Shape is 1D: a simple list of 4 numbers)
+
+for digit in range(10):
+  matching_indices = np.where(y_train.flatten() == digit)[0]
+
+plt.figure(figsize=(5, 2))
+plt.suptitle(f"Category: Digit {digit}", fontsize = 10, fontweight='bold', y=1.05)
+
+img_index = matching_indices[i]
+img = X_train[img_index]
+
+if img.max() &gt; 1.0:
+    img = img.astype(np.uint8)
+
+
+plt.imshow(img)
+plt.axis('off')
+plt.title(f"Index: {img_index}", fontsize=6)
+
+plt.show()
+
+
+digits, counts = np.unique(y_train, return_counts=True)
+category_counts = dict(zip(digits, counts))
+print(category_counts)
+</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <img class="output-image" src="data:image/png;base64,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
+" alt="Output" />
+                        </div>
+                    </div>
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">{np.uint8(0): np.int64(4186), np.uint8(1): np.int64(4172), np.uint8(2): np.int64(4197), np.uint8(3): np.int64(4281), np.uint8(4): np.int64(4188), np.uint8(5): np.int64(4232), np.uint8(6): np.int64(4168), np.uint8(7): np.int64(4192), np.uint8(8): np.int64(4188), np.uint8(9): np.int64(4196)}
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>import torch
+import torchvision.datasets as datasets
+import torchvision.transforms as transforms
+from torch.utils.data import DataLoader</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>import torch
+
+# Convert NumPy array to Torch tensor
+train_tensor = torch.tensor(X_train, dtype=torch.float32)
+
+# Add channel dimension if grayscale
+if train_tensor.ndim == 3:
+    train_tensor = train_tensor.unsqueeze(1)   # (N,1,H,W)
+
+# Scale to [0,1] if needed
+if train_tensor.max() &gt; 1:
+    train_tensor = train_tensor / 255.0
+
+mean = train_tensor.mean(dim=(0, 2, 3))
+std  = train_tensor.std(dim=(0, 2, 3))
+
+print("Mean:", mean)
+print("Std :", std)</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Mean: tensor([0.4403])
+Std : tensor([0.1950])
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Compute mean and standard deviation to normalize image inputs
+
+#data = datasets.SVHN(root='./data', split='train', download=True, transform=transforms.ToTensor())
+#loader = DataLoader(data, batch_size=64, shuffle=False)
+
+#def compute_mean_std(loader):
+ #   channels_sum = 0
+  #  channels_squared_sum = 0
+   # num_batches = 0
+    #num_samples = 0
+
+    #for data, _ in loader:
+        # Dimensions for (batch, channel, height, width) are (0, 2, 3)
+     #   channels_sum += torch.mean(data, dim=[0, 2, 3])
+      #  channels_squared_sum += torch.mean(data ** 2, dim=[0, 2, 3])
+
+       # num_batches += 1
+
+    #mean = channels_sum / num_batches
+   # std = torch.sqrt(channels_squared_sum / num_batches - mean ** 2)
+
+   # return mean, std
+
+#mean, std = compute_mean_std(loader)
+#print("Mean:", mean)
+#print("Std:", std)</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=(0.4403,),
+        std=(0.1950,)
+    )
+])
+
+X_train = X_train.astype(np.float32) / 255.0
+X_val   = X_val.astype(np.float32) / 255.0
+X_test  = X_test.astype(np.float32) / 255.0
+
+mean = 0.4403
+std = 0.1950
+
+X_train = (X_train - mean) / std
+X_val   = (X_val   - mean) / std
+X_test  = (X_test  - mean) / std</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># 1. Create TensorDatasets for each split
+
+from torch.utils.data import TensorDataset, DataLoader
+
+import torch
+
+# 1. Convert Feature Images (X) to float32 tensors
+X_train_tensor = torch.tensor(X_train, dtype=torch.float32)
+X_val_tensor = torch.tensor(X_val, dtype=torch.float32)
+X_test_tensor = torch.tensor(X_test, dtype=torch.float32)
+
+# 2. Convert Labels (y) to long (int64) tensors
+y_train_tensor = torch.tensor(y_train, dtype=torch.long)
+y_val_tensor = torch.tensor(y_val, dtype=torch.long)
+y_test_tensor = torch.tensor(y_test, dtype=torch.long)
+
+
+train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
+val_dataset = TensorDataset(X_val_tensor, y_val_tensor)
+test_dataset = TensorDataset(X_test_tensor, y_test_tensor)
+
+train_loader = DataLoader(dataset=train_dataset, batch_size=64, shuffle=True)
+test_loader = DataLoader(dataset=test_dataset, batch_size=64, shuffle=False)</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># initialize model building
+import torch
+import torch.nn as nn
+
+class SVHNClassifier(nn.Module):
+    def __init__(self, num_classes=10):
+        super(SVHNClassifier, self).__init__()
+
+        #Block 1 Convolution + Pooling
+        # Separates the tasks.
+        #The convolution extracts fine-grained features first.
+        #The pooling layer then summarizes those features in a separate step.
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+
+
+        #Block 2
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+
+        #Block 3         # Block 3: Input 64x8x8 --&gt; Output 128x4x4
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
+        self.bn3 = nn.BatchNorm2d(128)
+
+        # Non-linearity
+        self.relu = nn.ReLU()
+        # 2x2 window &amp; max-value
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+
+         # Fully Connected Layers
+        self.fc1 = nn.Linear(128 * 4 * 4, 256)
+        self.dropout = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(256, num_classes)
+
+    def forward(self, x):
+        x = self.pool(self.relu(self.bn1(self.conv1(x))))
+        x = self.pool(self.relu(self.bn2(self.conv2(x))))
+        x = self.pool(self.relu(self.bn3(self.conv3(x))))
+
+        # Flatten the feature maps
+        x = x.view(x.size(0), -1)
+
+        x = self.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = self.fc2(x)
+        return x</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre># Initialize network, loss function, and optimizer
+import torch.optim as optim
+
+learning_rate = 0.001 #default for Adam optimizers
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+  #detects fastest hardware available to process code
+model = SVHNClassifier(num_classes=10).to(device)
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+  #need 'lr = ' to set up optional lr parameter after required</pre></div>
+            </div>
+        </div>
+        <div class="cell cell-code">
+            <div class="cell-prompt input-prompt">In [ ]:</div>
+            <div class="cell-content">
+                <div class="input-area"><pre>def train_and_evaluate():
+    for epoch in range(10):
+        model.train()
+        running_loss = 0.0
+
+        for images, labels in train_loader:
+            # Add channel dimension if missing (N, H, W) -&gt; (N, 1, H, W)
+            if images.ndim == 3:
+                images = images.unsqueeze(1)
+            images, labels = images.to(device), labels.to(device)
+
+            # Forward pass
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+
+            # Backward pass and optimization
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+            running_loss += loss.item() * images.size(0)
+
+        epoch_loss = running_loss / len(train_loader.dataset)
+
+        # Evaluation phase
+        model.eval()
+        correct = 0
+        total = 0
+        with torch.no_grad():
+            for images, labels in test_loader:
+                # Add channel dimension if missing (N, H, W) -&gt; (N, 1, H, W)
+                if images.ndim == 3:
+                    images = images.unsqueeze(1)
+                images, labels = images.to(device), labels.to(device)
+                outputs = model(images)
+                _, predicted = torch.max(outputs.data, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+
+        accuracy = 100 * correct / total
+        print(f"Epoch [{epoch+1}/{10}] | Train Loss: {epoch_loss:.4f} | Test Accuracy: {accuracy:.2f}%")
+
+# Execute the pipeline
+if __name__ == "__main__":
+    train_and_evaluate()</pre></div>
+                <div class="output-area">
+                    <div class="output-wrapper">
+                        <div class="cell-prompt output-prompt"></div>
+                        <div class="output-content">
+                            <div class="output-stream">Epoch [1/10] | Train Loss: 1.3726 | Test Accuracy: 84.57%
+Epoch [2/10] | Train Loss: 0.8517 | Test Accuracy: 87.44%
+Epoch [3/10] | Train Loss: 0.7206 | Test Accuracy: 88.94%
+Epoch [4/10] | Train Loss: 0.6543 | Test Accuracy: 89.56%
+Epoch [5/10] | Train Loss: 0.6123 | Test Accuracy: 90.29%
+Epoch [6/10] | Train Loss: 0.5857 | Test Accuracy: 91.06%
+Epoch [7/10] | Train Loss: 0.5568 | Test Accuracy: 90.83%
+Epoch [8/10] | Train Loss: 0.5318 | Test Accuracy: 91.67%
+Epoch [9/10] | Train Loss: 0.5124 | Test Accuracy: 91.99%
+Epoch [10/10] | Train Loss: 0.4875 | Test Accuracy: 92.09%
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="export-footer">
+        Exported with <a href="https://www.runcell.dev/tool/ipynb-to-html">runcell</a> — convert notebooks to HTML or PDF anytime at runcell.dev.
+    </footer>
+</body>
+</html>
